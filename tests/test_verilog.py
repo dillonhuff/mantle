@@ -69,3 +69,71 @@ O = ~I
 endmodule
 
 """.lstrip()
+
+
+def test_add():
+    Add1 = DefineUnsignedAdd(1)
+    assert verilog.compile(Add1) == """
+module UnsignedAdd1 (input [0:0] I0, input [0:0] I1, output [0:0] O);
+O = I0 + I1
+endmodule
+
+""".lstrip()
+    Add2 = DefineUnsignedAdd(2)
+    assert verilog.compile(Add2) == """
+module UnsignedAdd2 (input [1:0] I0, input [1:0] I1, output [1:0] O);
+O = I0 + I1
+endmodule
+
+""".lstrip()
+
+
+def test_sub():
+    Sub1 = DefineUnsignedSub(1)
+    assert verilog.compile(Sub1) == """
+module UnsignedSub1 (input [0:0] I0, input [0:0] I1, output [0:0] O);
+O = I0 - I1
+endmodule
+
+""".lstrip()
+    Sub2 = DefineUnsignedSub(2)
+    assert verilog.compile(Sub2) == """
+module UnsignedSub2 (input [1:0] I0, input [1:0] I1, output [1:0] O);
+O = I0 - I1
+endmodule
+
+""".lstrip()
+
+
+def test_mul():
+    Mul1 = DefineUnsignedMul(1)
+    assert verilog.compile(Mul1) == """
+module UnsignedMul1 (input [0:0] I0, input [0:0] I1, output [0:0] O);
+O = I0 * I1
+endmodule
+
+""".lstrip()
+    Mul2 = DefineUnsignedMul(2)
+    assert verilog.compile(Mul2) == """
+module UnsignedMul2 (input [1:0] I0, input [1:0] I1, output [1:0] O);
+O = I0 * I1
+endmodule
+
+""".lstrip()
+
+
+def test_div():
+    Div1 = DefineUnsignedDiv(1)
+    assert verilog.compile(Div1) == """
+module UnsignedDiv1 (input [0:0] I0, input [0:0] I1, output [0:0] O);
+O = I0 / I1
+endmodule
+
+""".lstrip()
+    Div2 = DefineUnsignedDiv(2)
+    assert verilog.compile(Div2) == """
+module UnsignedDiv2 (input [1:0] I0, input [1:0] I1, output [1:0] O);
+O = I0 / I1
+endmodule
+
+""".lstrip()

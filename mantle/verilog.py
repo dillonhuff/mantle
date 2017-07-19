@@ -67,3 +67,51 @@ def DefineInvert(N):
 
     _Invert.verilog = "O = ~I"
     return _Invert
+
+
+@lru_cache(maxsize=None)
+def DefineUnsignedAdd(N):
+    T = UInt(N)
+
+    class _UnsignedAdd(Circuit):
+        name = "UnsignedAdd{}".format(N)
+        IO = ["I0", In(T), "I1", In(T), "O", Out(T)]
+
+    _UnsignedAdd.verilog = "O = I0 + I1"
+    return _UnsignedAdd
+
+
+@lru_cache(maxsize=None)
+def DefineUnsignedSub(N):
+    T = UInt(N)
+
+    class _UnsignedSub(Circuit):
+        name = "UnsignedSub{}".format(N)
+        IO = ["I0", In(T), "I1", In(T), "O", Out(T)]
+
+    _UnsignedSub.verilog = "O = I0 - I1"
+    return _UnsignedSub
+
+
+@lru_cache(maxsize=None)
+def DefineUnsignedMul(N):
+    T = UInt(N)
+
+    class _UnsignedMul(Circuit):
+        name = "UnsignedMul{}".format(N)
+        IO = ["I0", In(T), "I1", In(T), "O", Out(T)]
+
+    _UnsignedMul.verilog = "O = I0 * I1"
+    return _UnsignedMul
+
+
+@lru_cache(maxsize=None)
+def DefineUnsignedDiv(N):
+    T = UInt(N)
+
+    class _UnsignedDiv(Circuit):
+        name = "UnsignedDiv{}".format(N)
+        IO = ["I0", In(T), "I1", In(T), "O", Out(T)]
+
+    _UnsignedDiv.verilog = "O = I0 / I1"
+    return _UnsignedDiv
