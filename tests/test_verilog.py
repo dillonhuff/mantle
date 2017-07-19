@@ -71,7 +71,7 @@ endmodule
 """.lstrip()
 
 
-def test_add():
+def test_unsigned_add():
     Add1 = DefineUnsignedAdd(1)
     assert verilog.compile(Add1) == """
 module UnsignedAdd1 (input [0:0] I0, input [0:0] I1, output [0:0] O);
@@ -88,7 +88,7 @@ endmodule
 """.lstrip()
 
 
-def test_sub():
+def test_unsigned_sub():
     Sub1 = DefineUnsignedSub(1)
     assert verilog.compile(Sub1) == """
 module UnsignedSub1 (input [0:0] I0, input [0:0] I1, output [0:0] O);
@@ -105,7 +105,7 @@ endmodule
 """.lstrip()
 
 
-def test_mul():
+def test_unsigned_mul():
     Mul1 = DefineUnsignedMul(1)
     assert verilog.compile(Mul1) == """
 module UnsignedMul1 (input [0:0] I0, input [0:0] I1, output [0:0] O);
@@ -122,7 +122,7 @@ endmodule
 """.lstrip()
 
 
-def test_div():
+def test_unsigned_div():
     Div1 = DefineUnsignedDiv(1)
     assert verilog.compile(Div1) == """
 module UnsignedDiv1 (input [0:0] I0, input [0:0] I1, output [0:0] O);
