@@ -17,7 +17,7 @@ def DefineAnd(N):
         name = "And{}".format(N)
         IO = ["I0", In(T), "I1", In(T), "O", Out(T)]
 
-    _And.verilog = "O = I0 & I1"
+    _And.verilog = "assign O = I0 & I1"
     return _And
 
 
@@ -33,7 +33,7 @@ def DefineOr(N):
         name = "Or{}".format(N)
         IO = ["I0", In(T), "I1", In(T), "O", Out(T)]
 
-    _Or.verilog = "O = I0 | I1"
+    _Or.verilog = "assign O = I0 | I1"
     return _Or
 
 
@@ -49,7 +49,7 @@ def DefineXor(N):
         name = "Xor{}".format(N)
         IO = ["I0", In(T), "I1", In(T), "O", Out(T)]
 
-    _Xor.verilog = "O = I0 ^ I1"
+    _Xor.verilog = "assign O = I0 ^ I1"
     return _Xor
 
 
@@ -65,7 +65,7 @@ def DefineInvert(N):
         name = "Invert{}".format(N)
         IO = ["I", In(T), "O", Out(T)]
 
-    _Invert.verilog = "O = ~I"
+    _Invert.verilog = "assign O = ~I"
     return _Invert
 
 
@@ -77,7 +77,7 @@ def DefineUnsignedAdd(N):
         name = "UnsignedAdd{}".format(N)
         IO = ["I0", In(T), "I1", In(T), "O", Out(T)]
 
-    _UnsignedAdd.verilog = "O = I0 + I1"
+    _UnsignedAdd.verilog = "assign O = I0 + I1"
     return _UnsignedAdd
 
 
@@ -89,7 +89,7 @@ def DefineUnsignedSub(N):
         name = "UnsignedSub{}".format(N)
         IO = ["I0", In(T), "I1", In(T), "O", Out(T)]
 
-    _UnsignedSub.verilog = "O = I0 - I1"
+    _UnsignedSub.verilog = "assign O = I0 - I1"
     return _UnsignedSub
 
 
@@ -101,7 +101,7 @@ def DefineUnsignedMul(N):
         name = "UnsignedMul{}".format(N)
         IO = ["I0", In(T), "I1", In(T), "O", Out(T)]
 
-    _UnsignedMul.verilog = "O = I0 * I1"
+    _UnsignedMul.verilog = "assign O = I0 * I1"
     return _UnsignedMul
 
 
@@ -113,5 +113,57 @@ def DefineUnsignedDiv(N):
         name = "UnsignedDiv{}".format(N)
         IO = ["I0", In(T), "I1", In(T), "O", Out(T)]
 
-    _UnsignedDiv.verilog = "O = I0 / I1"
+    _UnsignedDiv.verilog = "assign O = I0 / I1"
     return _UnsignedDiv
+
+
+@lru_cache(maxsize=None)
+def DefineUnsignedShiftLeft(N, amount):
+    assert N > 1, "TODO: Should we support shift left on a single bit?"
+    T = UInt(N)
+
+    class _UnsignedShiftLeft(Circuit):
+        name = "UnsignedShiftLeft{}_{}".format(N, amount)
+        IO = ["I", In(T), "O", Out(T)]
+
+    _UnsignedShiftLeft.verilog = "assign O = I << {}'d{}".format((N-1).bit_length(), amount)
+    return _UnsignedShiftLeft
+
+
+@lru_cache(maxsize=None)
+def DefineUnsignedDynamicShiftLeft(N):
+    assert N > 1, "TODO: Should we support shift left on a single bit?"
+    T = UInt(N)
+
+    class _UnsignedDynamicShiftLeft(Circuit):
+        name = "UnsignedDynamicShiftLeft{}".format(N)
+        IO = ["I0", In(T), "I1", In(T), "O", Out(T)]
+
+    _UnsignedDynamicShiftLeft.verilog = "assign O = I0 << I1"
+    return _UnsignedDynamicShiftLeft
+
+
+@lru_cache(maxsize=None)
+def DefineUnsignedShiftRight(N, amount):
+    assert N > 1, "TODO: Should we support shift left on a single bit?"
+    T = UInt(N)
+
+    class _UnsignedShiftRight(Circuit):
+        name = "UnsignedShiftRight{}_{}".format(N, amount)
+        IO = ["I", In(T), "O", Out(T)]
+
+    _UnsignedShiftRight.verilog = "assign O = I >> {}'d{}".format((N-1).bit_length(), amount)
+    return _UnsignedShiftRight
+
+
+@lru_cache(maxsize=None)
+def DefineUnsignedDynamicShiftRight(N):
+    assert N > 1, "TODO: Should we support shift left on a single bit?"
+    T = UInt(N)
+
+    class _UnsignedDynamicShiftRight(Circuit):
+        name = "UnsignedDynamicShiftRight{}".format(N)
+        IO = ["I0", In(T), "I1", In(T), "O", Out(T)]
+
+    _UnsignedDynamicShiftRight.verilog = "assign O = I0 >> I1"
+    return _UnsignedDynamicShiftRight
