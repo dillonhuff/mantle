@@ -78,6 +78,11 @@ DefineUnsignedSub = binop_factory("UnsignedSub", UInt, "-")
 DefineUnsignedMul = binop_factory("UnsignedMul", UInt, "*")
 DefineUnsignedDiv = binop_factory("UnsignedDiv", UInt, "/")
 
+DefineSignedAdd = binop_factory("SignedAdd", SInt, "+")
+DefineSignedSub = binop_factory("SignedSub", SInt, "-")
+DefineSignedMul = binop_factory("SignedMul", SInt, "*")
+DefineSignedDiv = binop_factory("SignedDiv", SInt, "/")
+
 
 def comparison_factory(name, T, op):
     @lru_cache(maxsize=None)
@@ -93,3 +98,8 @@ DefineUnsignedLt = comparison_factory("UnsignedLt", UInt, "<")
 DefineUnsignedLtE = comparison_factory("UnsignedLtE", UInt, "<=")
 DefineUnsignedGt = comparison_factory("UnsignedGt", UInt, ">")
 DefineUnsignedGtE = comparison_factory("UnsignedGtE", UInt, ">=")
+
+DefineSignedLt = comparison_factory( "SignedLt",  SInt, "<")
+DefineSignedLtE = comparison_factory("SignedLtE", SInt, "<=")
+DefineSignedGt = comparison_factory( "SignedGt",  SInt, ">")
+DefineSignedGtE = comparison_factory("SignedGtE", SInt, ">=")
