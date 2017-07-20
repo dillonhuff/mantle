@@ -140,16 +140,16 @@ endmodule
 
 
 def test_shift_left():
-    ShiftLeft2_1 = DefineUnsignedShiftLeft(2, 1)
+    ShiftLeft2_1 = DefineShiftLeft(2, 1)
     assert verilog.compile(ShiftLeft2_1) == """
-module UnsignedShiftLeft2_1 (input [1:0] I, output [1:0] O);
+module ShiftLeft2_1 (input [1:0] I, output [1:0] O);
 assign O = I << 1'd1
 endmodule
 
 """.lstrip()
-    ShiftLeft4_2 = DefineUnsignedShiftLeft(4, 2)
+    ShiftLeft4_2 = DefineShiftLeft(4, 2)
     assert verilog.compile(ShiftLeft4_2) == """
-module UnsignedShiftLeft4_2 (input [3:0] I, output [3:0] O);
+module ShiftLeft4_2 (input [3:0] I, output [3:0] O);
 assign O = I << 2'd2
 endmodule
 
@@ -157,9 +157,9 @@ endmodule
 
 
 def test_dynamic_shift_left():
-    DynamicShiftLeft2 = DefineUnsignedDynamicShiftLeft(2)
+    DynamicShiftLeft2 = DefineDynamicShiftLeft(2)
     assert verilog.compile(DynamicShiftLeft2) == """
-module UnsignedDynamicShiftLeft2 (input [1:0] I0, input [1:0] I1, output [1:0] O);
+module DynamicShiftLeft2 (input [1:0] I0, input [1:0] I1, output [1:0] O);
 assign O = I0 << I1
 endmodule
 
@@ -167,16 +167,16 @@ endmodule
 
 
 def test_shift_right():
-    ShiftRight2_1 = DefineUnsignedShiftRight(2, 1)
+    ShiftRight2_1 = DefineShiftRight(2, 1)
     assert verilog.compile(ShiftRight2_1) == """
-module UnsignedShiftRight2_1 (input [1:0] I, output [1:0] O);
+module ShiftRight2_1 (input [1:0] I, output [1:0] O);
 assign O = I >> 1'd1
 endmodule
 
 """.lstrip()
-    ShiftRight4_2 = DefineUnsignedShiftRight(4, 2)
+    ShiftRight4_2 = DefineShiftRight(4, 2)
     assert verilog.compile(ShiftRight4_2) == """
-module UnsignedShiftRight4_2 (input [3:0] I, output [3:0] O);
+module ShiftRight4_2 (input [3:0] I, output [3:0] O);
 assign O = I >> 2'd2
 endmodule
 
@@ -184,9 +184,9 @@ endmodule
 
 
 def test_dynamic_shift_right():
-    DynamicShiftRight2 = DefineUnsignedDynamicShiftRight(2)
+    DynamicShiftRight2 = DefineDynamicShiftRight(2)
     assert verilog.compile(DynamicShiftRight2) == """
-module UnsignedDynamicShiftRight2 (input [1:0] I0, input [1:0] I1, output [1:0] O);
+module DynamicShiftRight2 (input [1:0] I0, input [1:0] I1, output [1:0] O);
 assign O = I0 >> I1
 endmodule
 
