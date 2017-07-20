@@ -143,14 +143,14 @@ def test_shift_left():
     ShiftLeft2_1 = DefineShiftLeft(2, 1)
     assert verilog.compile(ShiftLeft2_1) == """
 module ShiftLeft2_1 (input [1:0] I, output [1:0] O);
-assign O = I << 1'd1
+assign O = I << 2'd1
 endmodule
 
 """.lstrip()
     ShiftLeft4_2 = DefineShiftLeft(4, 2)
     assert verilog.compile(ShiftLeft4_2) == """
 module ShiftLeft4_2 (input [3:0] I, output [3:0] O);
-assign O = I << 2'd2
+assign O = I << 4'd2
 endmodule
 
 """.lstrip()
@@ -170,14 +170,14 @@ def test_shift_right():
     ShiftRight2_1 = DefineShiftRight(2, 1)
     assert verilog.compile(ShiftRight2_1) == """
 module ShiftRight2_1 (input [1:0] I, output [1:0] O);
-assign O = I >> 1'd1
+assign O = I >> 2'd1
 endmodule
 
 """.lstrip()
     ShiftRight4_2 = DefineShiftRight(4, 2)
     assert verilog.compile(ShiftRight4_2) == """
 module ShiftRight4_2 (input [3:0] I, output [3:0] O);
-assign O = I >> 2'd2
+assign O = I >> 4'd2
 endmodule
 
 """.lstrip()
