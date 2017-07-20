@@ -139,7 +139,7 @@ endmodule
 """.lstrip()
 
 
-def test_unsigned_shift_left():
+def test_shift_left():
     ShiftLeft2_1 = DefineUnsignedShiftLeft(2, 1)
     assert verilog.compile(ShiftLeft2_1) == """
 module UnsignedShiftLeft2_1 (input [1:0] I, output [1:0] O);
@@ -156,7 +156,7 @@ endmodule
 """.lstrip()
 
 
-def test_unsigned_dynamic_shift_left():
+def test_dynamic_shift_left():
     DynamicShiftLeft2 = DefineUnsignedDynamicShiftLeft(2)
     assert verilog.compile(DynamicShiftLeft2) == """
 module UnsignedDynamicShiftLeft2 (input [1:0] I0, input [1:0] I1, output [1:0] O);
@@ -166,7 +166,7 @@ endmodule
 """.lstrip()
 
 
-def test_unsigned_shift_right():
+def test_shift_right():
     ShiftRight2_1 = DefineUnsignedShiftRight(2, 1)
     assert verilog.compile(ShiftRight2_1) == """
 module UnsignedShiftRight2_1 (input [1:0] I, output [1:0] O);
@@ -183,7 +183,7 @@ endmodule
 """.lstrip()
 
 
-def test_unsigned_dynamic_shift_right():
+def test_dynamic_shift_right():
     DynamicShiftRight2 = DefineUnsignedDynamicShiftRight(2)
     assert verilog.compile(DynamicShiftRight2) == """
 module UnsignedDynamicShiftRight2 (input [1:0] I0, input [1:0] I1, output [1:0] O);
