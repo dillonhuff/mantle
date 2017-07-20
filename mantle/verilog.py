@@ -63,17 +63,33 @@ DefineShiftLeft, DefineDynamicShiftLeft = shift_factory("Left", "<<")
 DefineShiftRight, DefineDynamicShiftRight = shift_factory("Right", ">>")
 
 
-def binop_factory(name, T, verilog):
+def binop_factory(name, T, op):
     @lru_cache(maxsize=None)
     def DefineCirc(N):
         _type = T(N)
         circuit = DefineCircuit("{}{}".format(name, N), "I0", In(_type), "I1", In(_type), "O", Out(_type))
-        circuit.verilog = verilog
+        circuit.verilog = "assign O = I0 {} I1".format(op)
         EndCircuit()
         return circuit
     return DefineCirc
 
-DefineUnsignedAdd = binop_factory("UnsignedAdd", UInt, "assign O = I0 + I1")
-DefineUnsignedSub = binop_factory("UnsignedSub", UInt, "assign O = I0 - I1")
-DefineUnsignedMul = binop_factory("UnsignedMul", UInt, "assign O = I0 * I1")
-DefineUnsignedDiv = binop_factory("UnsignedDiv", UInt, "assign O = I0 / I1")
+DefineUnsignedAdd = binop_factory("UnsignedAdd", UInt, "+")
+DefineUnsignedSub = binop_factory("UnsignedSub", UInt, "-")
+DefineUnsignedMul = binop_factory("UnsignedMul", UInt, "*")
+DefineUnsignedDiv = binop_factory("UnsignedDiv", UInt, "/")
+
+
+def comparison_factory(name, T, op):
+    @lru_cache(maxsize=None)
+    def DefineCirc(N):
+        _type = T(N)
+        circuit = DefineCircuit("{}{}".format(name, N), "I0", In(_type), "I1", In(_type), "O", Out(Bit))
+        circuit.verilog = "assign O = I0 {} I1".format(op)
+        EndCircuit()
+        return circuit
+    return DefineCirc
+
+DefineUnsignedLt = comparison_factory("UnsignedLt", UInt, "<")
+DefineUnsignedLtE = comparison_factory("UnsignedLtE", UInt, "<=")
+DefineUnsignedGt = comparison_factory("UnsignedGt", UInt, ">")
+DefineUnsignedGtE = comparison_factory("UnsignedGtE", UInt, ">=")

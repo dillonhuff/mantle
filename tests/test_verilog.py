@@ -95,3 +95,26 @@ test_unsigned_add = binop_test_factory("UnsignedAdd", "+")
 test_unsigned_sub = binop_test_factory("UnsignedSub", "-")
 test_unsigned_mul = binop_test_factory("UnsignedMul", "*")
 test_unsigned_div = binop_test_factory("UnsignedDiv", "/")
+
+def comparison_test_factory(name, op):
+    def _test():
+        circ = eval("Define{}(1)".format(name))
+        assert verilog.compile(circ) == """
+module {}1 (input [0:0] I0, input [0:0] I1, output  O);
+assign O = I0 {} I1
+endmodule
+
+""".format(name, op).lstrip()
+        circ = eval("Define{}(2)".format(name))
+        assert verilog.compile(circ) == """
+module {}2 (input [1:0] I0, input [1:0] I1, output  O);
+assign O = I0 {} I1
+endmodule
+
+""".format(name, op).lstrip()
+    return _test
+
+test_unsigned_lt = comparison_test_factory("UnsignedLt", "<")
+test_unsigned_lte = comparison_test_factory("UnsignedLtE", "<=")
+test_unsigned_gt = comparison_test_factory("UnsignedGt", ">")
+test_unsigned_gte = comparison_test_factory("UnsignedGtE", ">=")
