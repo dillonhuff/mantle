@@ -4,7 +4,7 @@ try:
 except ImportError:
     from backports.functools_lru_cache import lru_cache
 
-def bits_binop_factory(name, verilog):
+def bits_binop_factory(name, op):
     @lru_cache(maxsize=None)
     def DefineCirc(N):
         if N == 1:
@@ -14,7 +14,7 @@ def bits_binop_factory(name, verilog):
             T = Bits(N)
 
         circuit = DefineCircuit("{}{}".format(name, N), "I0", In(T), "I1", In(T), "O", Out(T))
-        circuit.verilog = verilog
+        circuit.verilog = "assign O = I0 {} I1".format(op)
         EndCircuit()
         return circuit
     return DefineCirc
@@ -34,9 +34,9 @@ def bits_unop_factory(name, verilog):
         return circuit
     return DefineCirc
 
-DefineAnd = bits_binop_factory("And", "assign O = I0 & I1")
-DefineOr = bits_binop_factory("Or", "assign O = I0 | I1")
-DefineXor = bits_binop_factory("Xor", "assign O = I0 ^ I1")
+DefineAnd = bits_binop_factory("And", "&")
+DefineOr  = bits_binop_factory("Or",  "|")
+DefineXor = bits_binop_factory("Xor", "^")
 DefineInvert = bits_unop_factory("Invert", "assign O = ~I")
 
 def shift_factory(direction, op):
